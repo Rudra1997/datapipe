@@ -5,7 +5,6 @@ pipeline {
         stage('Checkout GitHub Repository') {
             steps {
                 script {
-                    // Checkout the repository from GitHub
                     echo "Checking out repository from GitHub..."
                     git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Rudra1997/datapipe.git'
                     echo "Successfully checked out repository."
@@ -80,26 +79,11 @@ pipeline {
                 }
             }
         }
-        
-        // stage('Microservice Stage') {
-        //     steps {
-        //         script {
-        //             if (fileExists("data.csv")) {
-        //                 echo "Posting data to microservice..."
-        //                 def response = sh(script: "curl -X POST http://microservice_endpoint/api/process_data -F 'file=@data.csv'", returnStdout: true).trim()
-        //                 echo "Response from microservice: ${response}"
-        //                 echo "Data posted to microservice successfully."
-        //             } else {
-        //                 echo "Data file not found, skipping this stage."
-        //             }
-        //         }
-        //     }
-        // }
     }
     
     post {
         always {
-            // Clean up workspace after every run
+            archiveArtifacts artifacts: 'Data_Quality_Report.pdf', allowEmptyArchive: true
             cleanWs()
         }
         failure {

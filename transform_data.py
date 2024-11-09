@@ -17,6 +17,6 @@ def transform_data(input_file):
             writer.writerow(row)
 
 if __name__ == "__main__":
-    input_file = "data.csv"
+    input_file = "extracted_data.csv"
     transform_data(input_file)
     print(f"Data transformed in {input_file}")

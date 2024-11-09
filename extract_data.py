@@ -15,6 +15,6 @@ def extract_data(output_file):
             writer.writerow(row)
 
 if __name__ == "__main__":
-    output_file = "data.csv"
+    output_file = "extracted_data.csv"
     extract_data(output_file)
     print(f"Data extracted to {output_file}")

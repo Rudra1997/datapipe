@@ -7,6 +7,6 @@ def ingest_data(input_file):
             print(f"Ingesting data: {row}")
 
 if __name__ == "__main__":
-    input_file = "data.csv"
+    input_file = "extracted_data.csv"
     ingest_data(input_file)
     print(f"Data ingested from {input_file}")

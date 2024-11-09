@@ -17,6 +17,7 @@ class TestDataQuality(unittest.TestCase):
         """Set up the data and report"""
         self.df = df
         self.report = []
+        self.df['Transaction_Date'] = pd.to_datetime(self.df['Transaction_Date'])
 
     def add_report_entry(self, test_name, result, message):
         """Adds an entry to the report list"""

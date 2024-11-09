@@ -1,3 +1,4 @@
+@Library('jenkins-shared-library@master') _
 pipeline {
     agent any
 
@@ -83,14 +84,20 @@ pipeline {
     
     post {
         always {
-            archiveArtifacts artifacts: 'Data_Quality_Report.pdf', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'Data_Quality_Report.pdf, data.csv', allowEmptyArchive: true
             cleanWs()
         }
         failure {
-            echo "Pipeline failed. Please check the logs."
+            script {
+                emailNotification("Rudradeep.Deb@in.ey.com")
+                echo "Pipeline failed. Please check the logs."
+            }
         }
         success {
-            echo "Pipeline completed successfully."
+            script {
+                emailNotification("Rudradeep.Deb@in.ey.com")
+                echo "Pipeline completed successfully."
+            }
         }
     }
 }

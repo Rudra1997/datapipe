@@ -18,7 +18,7 @@ pipeline {
                 script {
                     echo "Starting Data Extraction..."
                     if (fileExists("extract_data.py")) {
-                        def result = sh(script: "python3 extract_data.py data.csv", returnStdout: true).trim()
+                        def result = sh(script: "python3 extract_data.py", returnStdout: true).trim()
                         if (result) {
                             echo "Data Extraction Output: ${result}"
                         }
@@ -35,7 +35,7 @@ pipeline {
                 script {
                     echo "Starting Data Transformation..."
                     if (fileExists("transform_data.py")) {
-                        def result = sh(script: "python3 transform_data.py data.csv", returnStdout: true).trim()
+                        def result = sh(script: "python3 transform_data.py", returnStdout: true).trim()
                         if (result) {
                             echo "Data Transformation Output: ${result}"
                         }
@@ -52,7 +52,7 @@ pipeline {
                 script {
                     echo "Starting Data Ingestion..."
                     if (fileExists("ingest_data.py")) {
-                        def result = sh(script: "python3 ingest_data.py data.csv", returnStdout: true).trim()
+                        def result = sh(script: "python3 ingest_data.py", returnStdout: true).trim()
                         if (result) {
                             echo "Data Ingestion Output: ${result}"
                         }

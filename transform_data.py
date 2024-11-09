@@ -1,22 +1,15 @@
-import csv
+import pandas as pd
+import numpy as np
 
-def transform_data(input_file):
-    transformed_data = []
-    with open(input_file, 'r') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            # Example transformation: add a new field
-            row['processed_amount'] = float(row['amount']) * 1.1
-            transformed_data.append(row)
-    
-    with open(input_file, 'w', newline='') as csvfile:
-        fieldnames = ['id', 'name', 'Transaction_Date', 'amount', 'processed_amount']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        for row in transformed_data:
-            writer.writerow(row)
+def transform_data(file_path):
+    df = pd.read_csv(file_path)
+    # Example transformation: add a new field
+    df['processed_amount'] = df['Transaction_Amount'] * 1.1
+    # Example transformation: fill NaN values in 'Sender_Name' with 'Unknown Sender'
+    df['Sender_Name'] = df['Sender_Name'].fillna('Unknown Sender')
+    df.to_csv(file_path, index=False)
+    print(f"Data transformed and saved to {file_path}")
 
 if __name__ == "__main__":
-    input_file = "extracted_data.csv"
-    transform_data(input_file)
-    print(f"Data transformed in {input_file}")
+    file_path = "extracted_data.csv"
+    transform_data(file_path)
